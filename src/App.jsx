@@ -1,16 +1,35 @@
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import CssBaseline from '@mui/material/CssBaseline'
 import Typography from '@mui/material/Typography'
 import Container from '@mui/material/Container'
-import Box from '@mui/material/Box'
 import Counter from './components/Counter'
 import CountHistory from './components/CountHistory'
-import '@fontsource/roboto/400.css' 
+import '@fontsource/roboto/400.css'
 
 function App() {
   const [history, setHistory] = useState([])
+  const [count, setCount] = useState(0)
+  const [stepValue, setStepValue] = useState(1)
 
-  const handleRecord = (prev) => setHistory(h => [prev, ...h])
+  const handleIncrement = () => {
+    const next = count + stepValue
+    setCount(next)
+    setHistory(prevHistory => [next, ...prevHistory])
+  }
+
+  const handleDecrement = () => {
+    const next = count - stepValue
+    setCount(next)
+    setHistory(prevHistory => [next, ...prevHistory])
+  }
+
+  const handleStepChange = (val) => setStepValue(val)
+
+  const handleReset = () => {
+    setHistory([])
+    setCount(0)
+    setStepValue(1)
+  }
 
   return (
     <>
@@ -32,11 +51,19 @@ function App() {
           Counter App
         </Typography>
 
-        <Counter onRecord={handleRecord} />
-        <CountHistory history={history} onClear={() => setHistory([])} />
+        <Counter
+          count={count}
+          stepValue={stepValue}
+          onIncrement={handleIncrement}
+          onDecrement={handleDecrement}
+          onStepChange={handleStepChange}
+          onReset={handleReset}
+        />
+
+        <CountHistory history={history} />
       </Container>
     </>
   )
-} 
+}
 
 export default App
