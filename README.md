@@ -1,16 +1,6 @@
-# React + Vite
+I guess Lab 1 didn't require reflections.
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+useEffect was a bit of a challenge. I thought I was being clever using useEffect whenever the counter changed, to then update the history... but it kept calling it twice on page load; calling it once because useEffect as always called once, then it got called again becuase the App main component I guess mounted. I also had a challenge on updating the count history trying to mimic what was on the lab preview where I log the count after it increments/decrements instead of before. I did use the setCount(previousCount => previousCount + stepVal) instead of setCount(count + stepVal) but count was for some reason not updated just yet as I logged the count....
+I resorted to having a variable called 'next' and setting that to count + the stepVal and then just inserting setCount(next) which worked but I was miffed that the previous solution didn't quite worked.
 
-Currently, two official plugins are available:
-
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) (or [oxc](https://oxc.rs) when used in [rolldown-vite](https://vite.dev/guide/rolldown)) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
-
-## React Compiler
-
-The React Compiler is currently not compatible with SWC. See [this issue](https://github.com/vitejs/vite-plugin-react/issues/428) for tracking the progress.
-
-## Expanding the ESLint configuration
-
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+The auto save and simulating a debounce I just had to google it
